@@ -21,19 +21,12 @@ int main()
 
 	char buf[300];
 
-	while(1)
+	do
 	{
-		fscanf(fin, "|   GRB %x|%lf|%30c|%d %d %d.%d| %d %d %d.%d|        %d|%20c|             %c|        %c|   %d|",
-			&data.NAME, &data.TIME, data.OBSERVATORY,
-			&data._RA2000[0],&data._RA2000[1],&data._RA2000[2],&data._RA2000[3] , 
-			&data._DECL2000[0],&data._DECL2000[1],&data._DECL2000[2],&data._DECL2000[3] , 
-			&data.COORD_FLAG, data.REGION, &data.AFTERGLOW_FLAG, &data.FLUX_FLAG, &data.ID);
-		printf("|   GRB %x|%lf|%s|%d %d %d.%d| %d %d %d.%d|%d|%s|%c|%c|%d|\n",
-			data.NAME, data.TIME, data.OBSERVATORY,
-			data._RA2000[0],data._RA2000[1],data._RA2000[2],data._RA2000[3] , 
-			data._DECL2000[0],data._DECL2000[1],data._DECL2000[2],data._DECL2000[3] , 
-			data.COORD_FLAG, data.REGION, data.AFTERGLOW_FLAG, data.FLUX_FLAG, data.ID);
-		fgets(buf, 300, fin);
+		fscanf(fin, "%154c",buf);
+		buf[154] = '\0';
+		printf("%s\n",buf);
 	}
+	while( fgets(buf, 300, fin));
 	return 0;
 }
