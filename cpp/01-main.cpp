@@ -7,33 +7,25 @@ using  namespace  std;
 int main()
 {
 	ifstream  file  ("task1.txt");
-	string arr[20];
+	char arr[20][100];
 	int bytes[20];
 	int spaces[20];
 	int num;
 	int line = 1;
+
 	long int seek = 0;
 	long int begin;
-	string str;
 
 	while(!file.eof())
 	{
 		num = 0;
-		file.seekg(seek*156,ios_base::beg); 
-
-		begin = file.tellg();
-		//num = 0;
-		while(1)
+		do
 		{
 			file >> arr[num];
 			bytes[num] = file.tellg();
 			num++;
-			if(file.tellg() > begin + 153)
-			{
-				getline(file, str);
-				break;
-			}
 		}
+		while(file.tellg() < 154*line);
 
 		cout << endl;
 		spaces[0] = 1;
@@ -45,7 +37,6 @@ int main()
 			cout << setw(spaces[i]) << arr[i];
 
 		line++;
-		seek++;
 	}
 
 	return 0;
