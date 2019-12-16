@@ -11,15 +11,23 @@ int main()
 	int bytes[20];
 	int spaces[20];
 	int num;
-	int line = 1;
 	long int seek = 0;
 	long int begin;
+	int start;
 	string str;
+
+	for(int i=0; i<5; i++)
+	{
+		getline(file, str);
+		cout << str << endl;
+	}
+
+	start = file.tellg();
 
 	while(!file.eof())
 	{
 		num = 0;
-		file.seekg(seek*156,ios_base::beg); 
+		file.seekg(seek*156 + start , ios_base::beg); 
 
 		begin = file.tellg();
 		//num = 0;
@@ -35,16 +43,14 @@ int main()
 			}
 		}
 
-		cout << endl;
 		spaces[0] = 1;
 		for(int i=0; i<num; i++)
 			spaces[i+1] = bytes[i+1] -  bytes[i];
 		
-		cout << endl;
-		for(int i=0; i<=num; i++)
+		for(int i=0; i<num; i++)
 			cout << setw(spaces[i]) << arr[i];
 
-		line++;
+		cout << endl;
 		seek++;
 	}
 
