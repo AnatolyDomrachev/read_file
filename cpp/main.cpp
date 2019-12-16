@@ -8,15 +8,27 @@ int main()
 {
 	ifstream  file  ("task1.txt");
 	char arr[15][100];
+	int bytes[15];
+	int spaces[15];
 
-	for(int i=0; i<15; i++)
-		file >> arr[i];
+	while(!file.eof())
+	{
+		for(int i=0; i<14; i++)
+		{
+			file >> arr[i];
+			bytes[i] = file.tellg();
+		}
 
-	for(int i=0; i<15; i++)
-		cout << arr[i];
+		cout << endl;
+		spaces[0] = 1;
+		for(int i=0; i<13; i++)
+			spaces[i+1] = bytes[i+1] -  bytes[i];
+		
+		cout << endl;
+		for(int i=0; i<14; i++)
+			cout << setw(spaces[i]) << arr[i];
+	}
 
-	//cout << setw(20) << "Hello there.";
-	cout << setw(20) << "Hello there.";
 	return 0;
 }
 
