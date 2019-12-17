@@ -37,10 +37,6 @@ int main()
 			infile >> arr[num];
 			bytes[num] = infile.tellg();
 			num++;
-
-			if(infile.eof())
-				break;
-
 			if(infile.tellg() > begin + 153)
 			{
 				getline(infile, str);
@@ -49,7 +45,6 @@ int main()
 		}
 
 		spaces[0] = 1;
-
 		for(int i=0; i<num; i++)
 			spaces[i+1] = bytes[i+1] -  bytes[i];
 		

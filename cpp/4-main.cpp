@@ -6,6 +6,7 @@ using  namespace  std;
 
 int main()
 {
+	ifstream  file  ("task1.txt");
 	string arr[20];
 	int bytes[20];
 	int spaces[20];
@@ -14,49 +15,42 @@ int main()
 	long int begin;
 	int start;
 	string str;
-	ifstream  infile  ("task1.txt");
-	ofstream  outfile  ("result.txt");
 
 	for(int i=0; i<5; i++)
 	{
-		getline(infile, str);
-		outfile << str << endl;
+		getline(file, str);
+		cout << str << endl;
 	}
 
-	start = infile.tellg();
+	start = file.tellg();
 
-	while(!infile.eof())
+	while(!file.eof())
 	{
 		num = 0;
-		infile.seekg(seek*156 + start , ios_base::beg); 
+		file.seekg(seek*156 + start , ios_base::beg); 
 
-		begin = infile.tellg();
+		begin = file.tellg();
 		//num = 0;
 		while(1)
 		{
-			infile >> arr[num];
-			bytes[num] = infile.tellg();
+			file >> arr[num];
+			bytes[num] = file.tellg();
 			num++;
-
-			if(infile.eof())
-				break;
-
-			if(infile.tellg() > begin + 153)
+			if(file.tellg() > begin + 153)
 			{
-				getline(infile, str);
+				getline(file, str);
 				break;
 			}
 		}
 
 		spaces[0] = 1;
-
 		for(int i=0; i<num; i++)
 			spaces[i+1] = bytes[i+1] -  bytes[i];
 		
 		for(int i=0; i<num; i++)
-			outfile << setw(spaces[i]) << arr[i];
+			cout << setw(spaces[i]) << arr[i];
 
-		outfile << endl;
+		cout << endl;
 		seek++;
 	}
 
