@@ -15,21 +15,25 @@ void read_str(FILE* fin, struct str* sst)
 
 void print_str(struct str sst)
 {
-	printf("|%s|%.15Lf|%s|%2d%2d%2.2f|%2d%2d%2.2f|%d|%s|%s|%s|%d|\n",
+	printf("|%s|%20Lf|%s|%02d %02d %05.2f|%3d %02d %5.2f|%10d|%s|%s|%s|%4d|\n",
 			sst.name, sst.time, sst.obs , sst.ra.v1, sst.ra.v2, sst.ra.v3, sst.de.v1, sst.de.v2, sst.de.v3, sst.cf, sst.region, sst.af, sst.ff, sst.id);
 }
 int main()
 {
+	char buf[300];
 	struct str sst;
 	FILE* fin = fopen("task1.txt", "r");
 	FILE* fout = fopen("result.txt", "w");
 	int a = 1;
 
-	//while(a == 1)
-	//{
+	for(int i=0; i< 5000; i++)
+	{
+		fgets(buf, 200, fin);
+		//printf("%s",buf);
+
 		read_str(fin, &sst);
 		print_str(sst);
-	//}
+	}
 
 	return 0;
 }
