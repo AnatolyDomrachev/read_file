@@ -13,7 +13,7 @@ struct str
 	char obs[40];
 	struct rade ra;
 	struct rade de;
-	int cf;
+	float cf;
 	char region[30];
 	char af[20];
 	char ff[10];
