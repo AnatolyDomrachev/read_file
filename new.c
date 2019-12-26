@@ -5,8 +5,9 @@ int read_str(FILE* fin)
 {
 	struct str sst;
 	char c;
-	fscanf(fin, "%c%s%d%c%Lf", &c, sst.name_s, &sst.name_n, &c, &sst.time);
-	printf("%c %s %d %c %.15Lf \n", c, sst.name_s, sst.name_n, c, sst.time);
+	fscanf(fin, "%c%s%d%c%Lf%c%30c", &c, sst.name_s, &sst.name_n, &c, &sst.time, &c, sst.obs );
+	sst.obs[30] = '\0';
+	printf("%c %s %d %c %.15Lf %c %s \n", c, sst.name_s, sst.name_n, c, sst.time, c, sst.obs );
 	printf("%.15Lf \n", sst.time);
 	return 1;
 }
