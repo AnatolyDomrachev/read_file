@@ -1,4 +1,3 @@
-
 struct rade
 {
 	int v1;
