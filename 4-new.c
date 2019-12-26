@@ -43,15 +43,16 @@ int main()
 	{
 			c = read_str(fin, &sst);
 			if(c == '|')
+			{
 				print_str(sst);
+				fgets(buf, 200, fin);
+			}
 			else
 			{
 				fgets(buf, 200, fin);
-				break;
+				printf("%c%s",c, buf);
 			}
-			fgets(buf, 200, fin);
 	}
-	printf("%c%s",c, buf);
 
 
 	return 0;
