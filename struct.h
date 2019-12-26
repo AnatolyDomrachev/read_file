@@ -11,12 +11,12 @@ struct str
 	char name_s[20];    
 	int name_n;    
 	long double time;         
-	char obs[20];
+	char obs[40];
 	struct rade ra;
 	struct rade de;
 	int cf;
 	char region[30];
-	char af;
-	char ff;
+	char af[20];
+	char ff[10];
 	int id ;
 }; 
