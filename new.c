@@ -1,25 +1,26 @@
 #include "stdio.h"
+#include "struct.h"
 
 int read_str(FILE* fin)
 {
-	char buf[14][100];
-
-	for(int i=0; i<14; i++)
-	{
-		fscanf(fin, "%s",buf[i]);
-		printf("%d %s\n",i, buf[i]);
-	}
+	struct str sst;
+	char c;
+	fscanf(fin, "%c%s%d%c%Lf", &c, sst.name_s, &sst.name_n, &c, &sst.time);
+	printf("%c %s %d %c %.15Lf \n", c, sst.name_s, sst.name_n, c, sst.time);
+	printf("%.15Lf \n", sst.time);
+	return 1;
+}
 
 int main()
 {
 	FILE* fin = fopen("task1.txt", "r");
 	FILE* fout = fopen("result.txt", "w");
+	int a = 1;
 
-	for(int i=0; i<14; i++)
-	{
-		fscanf(fin, "%s",buf[i]);
-		printf("%d %s\n",i, buf[i]);
-	}
+	//while(a == 1)
+	//{
+		a = read_str(fin);
+	//}
 
 	return 0;
 }
