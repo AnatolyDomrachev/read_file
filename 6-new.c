@@ -39,9 +39,9 @@ char read_str(FILE* fin, struct str* sst)
 	return c;
 }
 
-void print_str(struct str sst, FILE* fout)
+void print_str(struct str sst)
 {
-	fprintf(fout, "| %s %7X|%21.15Lf|%s|%02d %02d %05.2f|%3d %02d %5.2f|%10.1f|%s|%s|%s|%4d|\n",
+	printf("| %s %7X|%21.15Lf|%s|%02d %02d %05.2f|%3d %02d %5.2f|%10.1f|%s|%s|%s|%4d|\n",
 			sst.name_s, sst.name_n, sst.time, sst.obs , sst.ra.v1, sst.ra.v2, sst.ra.v3, sst.de.v1, sst.de.v2, sst.de.v3, sst.cf, sst.region, sst.af, sst.ff, sst.id);
 }
 int main()
@@ -49,21 +49,21 @@ int main()
 	char buf[300];
 	char c;
 	struct str sst;
-	FILE* fin = fopen("task1.txt", "r");
+	FILE* fin = fopen("task1.txt.def", "r");
 	FILE* fout = fopen("result.txt", "w");
 	int a = 1;
 
 	for(int i=0; i<5; i++)
 	{
 		fgets(buf, 200, fin);
-		fprintf(fout, "%s", buf);
+		printf("%s", buf);
 	}
 
 	while(!feof(fin))
 	{
 			c = read_str(fin, &sst);
 			if(c == '|')
-				print_str(sst, fout);
+				print_str(sst);
 			else
 			{
 				fgets(buf, 200, fin);
@@ -71,8 +71,6 @@ int main()
 			}
 			fgets(buf, 200, fin);
 	}
-	fprintf(fout, "%c%s",c, buf);
-	fclose(fin);
-	fclose(fout);
+	printf("%c%s",c, buf);
 	return 0;
 }

@@ -7,7 +7,8 @@ struct rade
  
 struct str
 {
-	char name[20];    
+	char name_s[20];    
+	int name_n;    
 	long double time;         
 	char obs[40];
 	struct rade ra;
