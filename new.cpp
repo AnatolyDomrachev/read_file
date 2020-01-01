@@ -40,7 +40,7 @@ char read_str(ifstream&  infile, struct str* sst)
 	infile.read(sst->obs, 30);
 	sst->obs[30] = '\0';
 	infile >> c;
-	infile >> sst->ra.v1;
+	infile >> dec >> sst->ra.v1;
 	infile >> c;
 	infile >> sst->ra.v2;
 	infile >> c;
@@ -67,13 +67,16 @@ char read_str(ifstream&  infile, struct str* sst)
 	getline(infile, s);
 }
 
-char print_str(ifstream&  outfile, struct str sst)
+char print_str(ofstream&  outfile, struct str sst)
 {
 	cout << "| " << sst.name_s << " ";
 	cout.width(7);
 	cout << hex << uppercase << sst.name_n;
-	cout.precision(20);
-	cout << "|" << sst.time;
+	cout << "|";
+	cout.precision(15);
+	cout.width(21);
+	cout.fill('0');
+	cout << sst.time;
 	cout << "|" << sst.obs;
 	cout << "|";
 	cout.width(2);
@@ -84,12 +87,11 @@ char print_str(ifstream&  outfile, struct str sst)
         cout << sst.ra.v2 << " ";
 	cout.width(5);
 	cout.precision(2);
-	std::cout.setf(std::ios::fixed);
 	cout.fill('0');
         cout << sst.ra.v3;
 	cout << "| ";
-	cout.width(2);
-	cout.fill('0');
+	cout.width(3);
+	//cout.fill('0');
 	cout << sst.de.v1 << " ";
 	cout.width(2);
 	cout.fill('0');
@@ -126,9 +128,16 @@ int main()
 	char c;
 	ofstream  outfile  ("result.txt");
 
-	read_str(infile, &sst);
-	//read_str(infile, &sst);
-	print_str(sst, outfile);
+	std::cout.setf(std::ios::fixed);
+
+	while(!infile.eof())
+	{
+		read_str(infile, &sst);
+		print_str(outfile, sst);
+	}
+
+	infile.close();
+	outfile.close();
 	return 0;
 }
 
