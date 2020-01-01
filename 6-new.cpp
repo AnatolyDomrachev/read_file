@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <fstream> 
+//#include <iomanip>
 
 struct rade
 {
@@ -26,49 +27,55 @@ struct str
 
 using  namespace  std;
 
-char read_str(ifstream&  infile, struct str* sst)
+char read_str(ifstream*  infile, struct str* sst)
 {
 	char c;
-	string s; 
-
-	infile >> c;
-	infile >> sst->name_s;
-	infile >> hex >> sst->name_n;
-	infile >> c;
-	infile >> sst->time;
-	infile >> c;
-	infile.read(sst->obs, 30);
+	*infile >> c;
+	*infile >> sst->name_s;
+	*infile >> hex >> sst->name_n;
+	*infile >> c;
+	*infile >> sst->time;
+	*infile >> c;
+	infile->read(sst->obs, 30);
 	sst->obs[30] = '\0';
-	infile >> c;
-	infile >> sst->ra.v1;
-	infile >> c;
-	infile >> sst->ra.v2;
-	infile >> c;
-	infile >> sst->ra.v3;
-	infile >> c;
-	infile >> sst->de.v1;
-	infile >> c;
-	infile >> sst->de.v2;
-	infile >> c;
-	infile >> sst->de.v3;
-	infile >> c;
-	infile >> sst->cf;
-	infile >> c;
-	infile.read(sst->region, 20);
+	*infile >> c;
+	*infile >> sst->ra.v1;
+	*infile >> c;
+	*infile >> sst->ra.v2;
+	*infile >> c;
+	*infile >> sst->ra.v3;
+	*infile >> c;
+	*infile >> sst->de.v1;
+	*infile >> c;
+	*infile >> sst->de.v2;
+	*infile >> c;
+	*infile >> sst->de.v3;
+	*infile >> c;
+	*infile >> sst->cf;
+	*infile >> c;
+	infile->read(sst->region, 20);
 	sst->region[20] = '\0';
-	infile >> c;
-	infile.read(sst->af, 14);
+	*infile >> c;
+	infile->read(sst->af, 14);
 	sst->af[14] = '\0';
-	infile >> c;
-	infile.read(sst->ff, 9);
+	*infile >> c;
+	infile->read(sst->ff, 9);
 	sst->ff[9] = '\0';
-	infile >> c;
-	infile >> sst->id;
-	getline(infile, s);
+	*infile >> c;
+	*infile >> sst->id;
 }
 
-char print_str(ifstream&  outfile, struct str sst)
+
+int main()
 {
+	struct str sst;
+	ifstream  infile  ("task1.txt.new");
+	char c;
+	ofstream  outfile  ("result.txt");
+
+	read_str(&infile, &sst);
+	print_str(sst, fout);
+
 	cout << "| " << sst.name_s << " ";
 	cout.width(7);
 	cout << hex << uppercase << sst.name_n;
@@ -116,19 +123,8 @@ char print_str(ifstream&  outfile, struct str sst)
 	cout.width(4);
 	cout << sst.id;
 	cout << "|";
+
 	cout << endl;
-}
-
-int main()
-{
-	struct str sst;
-	ifstream  infile  ("task1.txt.new");
-	char c;
-	ofstream  outfile  ("result.txt");
-
-	read_str(infile, &sst);
-	//read_str(infile, &sst);
-	print_str(sst, outfile);
 	return 0;
 }
 
