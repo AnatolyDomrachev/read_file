@@ -31,7 +31,6 @@ char read_str(ifstream&  infile, struct str* sst)
 	char c;
 	string s; 
 
-	infile >> c;
 	infile >> sst->name_s;
 	infile >> hex >> sst->name_n;
 	infile >> c;
@@ -89,7 +88,7 @@ char print_str(ofstream&  outfile, struct str sst)
 	cout.precision(2);
 	cout.fill('0');
         cout << sst.ra.v3;
-	cout << "| ";
+	cout << "|";
 	cout.width(3);
 	cout.fill(' ');
 	cout << sst.de.v1 << " ";
@@ -124,18 +123,35 @@ char print_str(ofstream&  outfile, struct str sst)
 int main()
 {
 	struct str sst;
-	ifstream  infile  ("task1.txt.new");
 	char c;
+	string s;
+	ifstream  infile  ("task1.txt");
 	ofstream  outfile  ("result.txt");
 
-	std::cout.setf(std::ios::fixed);
+	cout.setf(ios::fixed);
+
+	for(int i=0; i<5; i++)
+	{
+		getline(infile, s);
+		cout << s << endl;
+	}
 
 	while(!infile.eof())
 	{
-		read_str(infile, &sst);
-		print_str(outfile, sst);
+		infile >> c;
+		if(c == '|')
+		{
+			read_str(infile, &sst);
+			print_str(outfile, sst);
+		}
+		else
+		{
+			getline(infile, s);
+			break;
+		}
 	}
 
+	cout << c << s << endl;
 	infile.close();
 	outfile.close();
 	return 0;
