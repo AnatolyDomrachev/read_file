@@ -81,7 +81,7 @@ char print_str(ofstream&  outfile, struct str sst)
 	cout << "|";
 	cout.width(2);
 	cout.fill('0');
-        cout << sst.ra.v1 << " ";
+        cout << dec << sst.ra.v1 << " ";
 	cout.width(2);
 	cout.fill('0');
         cout << sst.ra.v2 << " ";
@@ -91,7 +91,7 @@ char print_str(ofstream&  outfile, struct str sst)
         cout << sst.ra.v3;
 	cout << "| ";
 	cout.width(3);
-	//cout.fill('0');
+	cout.fill(' ');
 	cout << sst.de.v1 << " ";
 	cout.width(2);
 	cout.fill('0');
