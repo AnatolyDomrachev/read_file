@@ -68,56 +68,56 @@ char read_str(ifstream&  infile, struct str* sst)
 
 char print_str(ofstream&  outfile, struct str sst)
 {
-	cout << "| " << sst.name_s << " ";
-	cout.width(7);
-	cout << hex << uppercase << sst.name_n;
-	cout << "|";
-	cout.precision(15);
-	cout.width(21);
-	cout.fill('0');
-	cout << sst.time;
-	cout << "|" << sst.obs;
-	cout << "|";
-	cout.width(2);
-	cout.fill('0');
-        cout << dec << sst.ra.v1 << " ";
-	cout.width(2);
-	cout.fill('0');
-        cout << sst.ra.v2 << " ";
-	cout.width(5);
-	cout.precision(2);
-	cout.fill('0');
-        cout << sst.ra.v3;
-	cout << "|";
-	cout.width(3);
-	cout.fill(' ');
-	cout << sst.de.v1 << " ";
-	cout.width(2);
-	cout.fill('0');
-        cout << sst.de.v2 << " ";
-	cout.width(5);
-	cout.precision(2);
-	cout.fill('0');
-        cout << sst.de.v3;
-	cout << "|";
-	cout.width(10);
-	cout.precision(1);
-	cout.fill(' ');
-	cout << sst.cf;
-	cout << "|";
-	cout.width(20);
-	cout << sst.region;
-	cout << "|";
-	cout.width(14);
-	cout << sst.af;
-	cout << "|";
-	cout.width(9);
-	cout << sst.ff;
-	cout << "|";
-	cout.width(4);
-	cout << sst.id;
-	cout << "|";
-	cout << endl;
+	outfile << "| " << sst.name_s << " ";
+	outfile.width(7);
+	outfile << hex << uppercase << sst.name_n;
+	outfile << "|";
+	outfile.precision(15);
+	outfile.width(21);
+	outfile.fill('0');
+	outfile << sst.time;
+	outfile << "|" << sst.obs;
+	outfile << "|";
+	outfile.width(2);
+	outfile.fill('0');
+        outfile << dec << sst.ra.v1 << " ";
+	outfile.width(2);
+	outfile.fill('0');
+        outfile << sst.ra.v2 << " ";
+	outfile.width(5);
+	outfile.precision(2);
+	outfile.fill('0');
+        outfile << sst.ra.v3;
+	outfile << "|";
+	outfile.width(3);
+	outfile.fill(' ');
+	outfile << sst.de.v1 << " ";
+	outfile.width(2);
+	outfile.fill('0');
+        outfile << sst.de.v2 << " ";
+	outfile.width(5);
+	outfile.precision(2);
+	outfile.fill('0');
+        outfile << sst.de.v3;
+	outfile << "|";
+	outfile.width(10);
+	outfile.precision(1);
+	outfile.fill(' ');
+	outfile << sst.cf;
+	outfile << "|";
+	outfile.width(20);
+	outfile << sst.region;
+	outfile << "|";
+	outfile.width(14);
+	outfile << sst.af;
+	outfile << "|";
+	outfile.width(9);
+	outfile << sst.ff;
+	outfile << "|";
+	outfile.width(4);
+	outfile << sst.id;
+	outfile << "|";
+	outfile << endl;
 }
 
 int main()
@@ -128,12 +128,12 @@ int main()
 	ifstream  infile  ("task1.txt");
 	ofstream  outfile  ("result.txt");
 
-	cout.setf(ios::fixed);
+	outfile.setf(ios::fixed);
 
 	for(int i=0; i<5; i++)
 	{
 		getline(infile, s);
-		cout << s << endl;
+		outfile << s << endl;
 	}
 
 	while(!infile.eof())
@@ -151,7 +151,7 @@ int main()
 		}
 	}
 
-	cout << c << s << endl;
+	outfile << c << s << endl;
 	infile.close();
 	outfile.close();
 	return 0;
