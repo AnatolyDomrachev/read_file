@@ -24,7 +24,6 @@ struct str
 	int id ;
 };
 
-
 using  namespace  std;
 
 char read_str(FILE* fin, struct str* sst)
@@ -44,7 +43,7 @@ char read_str(FILE* fin, struct str* sst)
 	return c;
 }
 
-char print_str(ofstream&  outfile, struct str sst)
+void print_str(ofstream&  outfile, struct str sst)
 {
 	outfile << "| " << sst.name_s << " ";
 	outfile.width(7);
@@ -98,45 +97,36 @@ char print_str(ofstream&  outfile, struct str sst)
 	outfile << endl;
 }
 
+
 int main()
 {
 	char buf[300];
-	struct str sst;
 	char c;
-	string s;
-	long double sum = 0;         
-
-	FILE* infile = fopen("task1.txt", "r");
+	struct str sst;
+	FILE* fin = fopen("task1.txt", "r");
 	ofstream  outfile  ("result.txt");
-
-	outfile.setf(ios::fixed);
+	int a = 1;
 
 	for(int i=0; i<5; i++)
 	{
-		fgets(buf, 200, infile);
-		outfile << buf << endl;
+		fgets(buf, 200, fin);
+		outfile << buf;
 	}
 
-	while(!feof(infile))
+	while(!feof(fin))
 	{
-		c = read_str(infile, &sst);
-		if(c == '|')
-		{
-			print_str(outfile, sst);
-			sum += sst.time - (int)sst.time;
-		}
-		else
-		{
-			fgets(buf, 200, infile);
-			break;
-		}
+			c = read_str(fin, &sst);
+			if(c == '|')
+				print_str(outfile, sst);
+			else
+			{
+				fgets(buf, 200, fin);
+				break;
+			}
+			fgets(buf, 200, fin);
 	}
-
-	outfile << c << s << endl;
-	cout.precision(20);
-	cout << sum << endl;
-	fclose(infile);
+	outfile << c << buf;
+	fclose(fin);
 	outfile.close();
 	return 0;
 }
-

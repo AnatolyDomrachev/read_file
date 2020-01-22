@@ -1,3 +1,5 @@
+#include <iostream> 
+#include <fstream> 
 #include "stdio.h"
 
 struct rade
@@ -39,31 +41,81 @@ char read_str(FILE* fin, struct str* sst)
 	return c;
 }
 
-void print_str(struct str sst, FILE* fout)
+void print_str(ofstream&  outfile, struct str sst)
 {
-	fprintf(fout, "| %s %7X|%21.15Lf|%s|%02d %02d %05.2f|%3d %02d %5.2f|%10.1f|%s|%s|%s|%4d|\n",
-			sst.name_s, sst.name_n, sst.time, sst.obs , sst.ra.v1, sst.ra.v2, sst.ra.v3, sst.de.v1, sst.de.v2, sst.de.v3, sst.cf, sst.region, sst.af, sst.ff, sst.id);
+	outfile << "| " << sst.name_s << " ";
+	outfile.width(7);
+	outfile << hex << uppercase << sst.name_n;
+	outfile << "|";
+	outfile.precision(15);
+	outfile.width(21);
+	outfile.fill('0');
+	outfile << sst.time;
+	outfile << "|" << sst.obs;
+	outfile << "|";
+	outfile.width(2);
+	outfile.fill('0');
+        outfile << dec << sst.ra.v1 << " ";
+	outfile.width(2);
+	outfile.fill('0');
+        outfile << sst.ra.v2 << " ";
+	outfile.width(5);
+	outfile.precision(2);
+	outfile.fill('0');
+        outfile << sst.ra.v3;
+	outfile << "|";
+	outfile.width(3);
+	outfile.fill(' ');
+	outfile << sst.de.v1 << " ";
+	outfile.width(2);
+	outfile.fill('0');
+        outfile << sst.de.v2 << " ";
+	outfile.width(5);
+	outfile.precision(2);
+	outfile.fill('0');
+        outfile << sst.de.v3;
+	outfile << "|";
+	outfile.width(10);
+	outfile.precision(1);
+	outfile.fill(' ');
+	outfile << sst.cf;
+	outfile << "|";
+	outfile.width(20);
+	outfile << sst.region;
+	outfile << "|";
+	outfile.width(14);
+	outfile << sst.af;
+	outfile << "|";
+	outfile.width(9);
+	outfile << sst.ff;
+	outfile << "|";
+	outfile.width(4);
+	outfile << sst.id;
+	outfile << "|";
+	outfile << endl;
 }
+
+
 int main()
 {
 	char buf[300];
 	char c;
 	struct str sst;
 	FILE* fin = fopen("task1.txt", "r");
-	FILE* fout = fopen("result.txt", "w");
+	ofstream  outfile  ("result.txt");
 	int a = 1;
 
 	for(int i=0; i<5; i++)
 	{
 		fgets(buf, 200, fin);
-		fprintf(fout, "%s", buf);
+		outfile << buf << endl;
 	}
 
 	while(!feof(fin))
 	{
 			c = read_str(fin, &sst);
 			if(c == '|')
-				print_str(sst, fout);
+				print_str(outfile, sst);
 			else
 			{
 				fgets(buf, 200, fin);
@@ -73,6 +125,6 @@ int main()
 	}
 	fprintf(fout, "%c%s",c, buf);
 	fclose(fin);
-	fclose(fout);
+	fclose(outfile);
 	return 0;
 }
